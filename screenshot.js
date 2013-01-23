@@ -10,6 +10,11 @@ page.open('http://m.guardian.co.uk/', function (status) {
           console.log(msg);
         };
 
+        page.onError = function(msg, trace) {
+            console.error(msg);    
+            phantom.exit()
+        };
+
         page.onLoadFinished = function(status) {
             console.log('Status: ' + status);
             page.render((new Date().toISOString()) +'.png');
@@ -119,9 +124,6 @@ page.open('http://m.guardian.co.uk/', function (status) {
                             item.node.attr('old-background', oldBackground);
                             console.log(item);
                         });
-
-                        //page.render('1.png');
-                        //console.log(c);
 
                     });
             
